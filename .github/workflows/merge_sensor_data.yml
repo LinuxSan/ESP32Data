@@ -2,7 +2,7 @@ name: Merge Sensor Data
 
 on:
   schedule:
-    - cron: '0 3 * * *'  # Runs daily at 3 AM UTC
+    - cron: '*/2 * * * *'  # Every 5 minutes (for testing)
   workflow_dispatch:      # Allows manual triggering
 
 jobs:
