@@ -3,7 +3,7 @@ name: Merge Sensor Data
 on:
   schedule:
     - cron: '0 */6 * * *'  # Runs every 6 hours
-  workflow_dispatch:      # Allows manual triggering
+  workflow_dispatch:
 
 jobs:
   merge-files:
@@ -30,9 +30,13 @@ jobs:
         python .github/scripts/merge_sensor_data.py
         
     - name: Commit and push changes
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
         git add data/sensor_data_combined.csv
         git commit -m "Auto-merged sensor data [skip ci]" || echo "No changes to commit"
-        git push || echo "Nothing to push"
+        git push https://x-access-token:$GITHUB_TOKEN@github.com/${{ github.repository }}.git
+
+
