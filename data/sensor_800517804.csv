@@ -1,0 +1,2 @@
+date,time,timestamp,temperature,humidity,gas_analog,gas_digital,light
+2025-05-14,06:03:23,800517803,27.3,32.9,663,1,4095
