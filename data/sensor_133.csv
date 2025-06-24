@@ -1,0 +1,2 @@
+date,time,timestamp,temperature,humidity,gas_lpg_ppm,gas_co_ppm,air_quality_index,gas_digital,ldr_lux
+2000-01-01,00:02:12,132,24.9,41.5,4.86,37.16,1.06,0,41
