@@ -1,7 +1,25 @@
 import os
 import glob
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timedelta # Import timedelta
+
+def cleanup_old_sensor_files(directory='data', hours_old=48):
+    """
+    Deletes individual sensor data files older than a specified number of hours.
+    """
+    now = datetime.now()
+    cutoff_time = now - timedelta(hours=hours_old)
+    
+    files = glob.glob(os.path.join(directory, 'sensor_*.csv'))
+    
+    for file in files:
+        try:
+            file_mod_time = datetime.fromtimestamp(os.path.getmtime(file))
+            if file_mod_time < cutoff_time:
+                os.remove(file)
+                print(f"Deleted old file: {file}")
+        except Exception as e:
+            print(f"Error deleting {file}: {e}")
 
 def merge_sensor_files():
     # Find all sensor data files
@@ -33,9 +51,8 @@ def merge_sensor_files():
     os.makedirs('data', exist_ok=True)
     combined.to_csv('data/sensor_data_combined.csv', index=False)
     
-    # Cleanup (optional): Remove individual files
-    # for file in files:
-    #     os.remove(file)
+    # Cleanup individual files after merging and saving
+    cleanup_old_sensor_files() # Call the cleanup function here
     
     return True
 
