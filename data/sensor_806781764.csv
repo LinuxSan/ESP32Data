@@ -1,2 +1,0 @@
-date,time,timestamp,temperature,humidity,gas_lpg_ppm,gas_co_ppm,air_quality_index,gas_digital,ldr_lux
-2025-07-25,18:02:43,806781763,32.4,39.2,0.04,0.05,0.11,0,28
